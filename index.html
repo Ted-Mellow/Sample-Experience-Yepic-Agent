@@ -246,15 +246,43 @@
     const agentView = document.getElementById('agentView');
     const startCallBtn = document.getElementById('startCallBtn');
     const endCallBtn = document.getElementById('endCallBtn');
+    const frame = document.getElementById('yepicFrame');
+
+    function autoClickStartButton() {
+      try {
+        const doc = frame.contentWindow.document;
+        const buttons = doc.querySelectorAll('button');
+
+        for (const btn of buttons) {
+          const text = btn.textContent.toLowerCase();
+          if (text.includes('start') || text.includes('call') || text.includes('begin') || text.includes('join')) {
+            btn.click();
+            return true;
+          }
+        }
+      } catch (e) {
+        // Cross-origin or frame not ready
+      }
+      return false;
+    }
 
     startCallBtn.addEventListener('click', () => {
       homeView.style.display = 'none';
       agentView.style.display = 'flex';
+      // Try to auto-click with delays to ensure iframe is ready
+      setTimeout(autoClickStartButton, 100);
+      setTimeout(autoClickStartButton, 500);
+      setTimeout(autoClickStartButton, 1200);
     });
 
     endCallBtn.addEventListener('click', () => {
       agentView.style.display = 'none';
       homeView.style.display = 'flex';
+    });
+
+    // Also try when iframe finishes loading
+    frame.addEventListener('load', () => {
+      setTimeout(autoClickStartButton, 300);
     });
   </script>
 </body>
