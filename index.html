@@ -11,7 +11,7 @@
       --bg1:#7ecfda;
       --bg2:#7ecfda;
       --card:#7ef2f2;
-      --stroke:#22d3ee22;
+      --stroke:#7ef2f2;
       --text:#dff6f9;
       --muted:#7ecfda;
       --accent:#00c8c8;
@@ -54,11 +54,9 @@
       background: linear-gradient(180deg, rgba(0,210,210,.07), rgba(0,210,210,.02));
       border-radius: calc(var(--radius) + 6px);
       box-shadow: var(--shadow);
-      position: sticky;
-      top: 12px;
-      z-index: 20;
       backdrop-filter: blur(12px);
       flex: 0 0 auto;
+      margin-top: 18px;
     }
 
     .brand{
@@ -142,7 +140,6 @@
     }
 
     main{
-      margin-top: 18px;
       flex: 1 1 auto;
       display:flex;
       flex-direction:column;
@@ -174,13 +171,26 @@
 
     @media (max-width: 600px){
       iframe{ min-height: 480px; }
-      header{ position: static; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <main>
+      <section class="card">
+        <div class="iframeWrap">
+          <iframe
+            id="yepicFrame"
+            title="Yepic Agent"
+            src='https://embed.yepic.ai/embed/6995b86542b61f65ffd25a43?key=eafaae7a006e7994314b234818627093&type=embed'
+            allow="camera; microphone; autoplay; clipboard-read; clipboard-write"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
     <header>
       <div class="brand">
         <div class="logo" aria-label="Brand">
@@ -198,20 +208,6 @@
         <button class="btn" id="reloadBtn" type="button">Reload Agent</button>
       </div>
     </header>
-
-    <main>
-      <section class="card">
-        <div class="iframeWrap">
-          <iframe
-            id="yepicFrame"
-            title="Yepic Agent"
-            src='https://embed.yepic.ai/embed/6995b86542b61f65ffd25a43?key=eafaae7a006e7994314b234818627093&type=embed'
-            allow="camera; microphone; autoplay; clipboard-read; clipboard-write"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </section>
-    </main>
   </div>
 
   <script>
