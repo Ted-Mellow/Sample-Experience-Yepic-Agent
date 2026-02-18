@@ -255,7 +255,7 @@
 
         for (const btn of buttons) {
           const text = btn.textContent.toLowerCase();
-          if (text.includes('start') || text.includes('call') || text.includes('begin') || text.includes('join')) {
+          if (text.includes('Start') || text.includes('call') || text.includes('begin') || text.includes('join')) {
             btn.click();
             return true;
           }
@@ -263,6 +263,29 @@
       } catch (e) {
         // Cross-origin or frame not ready
       }
+      return false;
+    }
+
+    function endTheCall() {
+      try {
+        const doc = frame.contentWindow.document;
+        const buttons = doc.querySelectorAll('button');
+
+        for (const btn of buttons) {
+          const text = btn.textContent.toLowerCase();
+          if (text.includes('end') || text.includes('hang') || text.includes('disconnect') || text.includes('close')) {
+            btn.click();
+            return true;
+          }
+        }
+      } catch (e) {
+        // Cross-origin or frame not ready
+      }
+
+      // Reload iframe to reset it
+      const src = frame.src;
+      frame.src = '';
+      frame.src = src;
       return false;
     }
 
@@ -276,6 +299,7 @@
     });
 
     endCallBtn.addEventListener('click', () => {
+      endTheCall();
       agentView.style.display = 'none';
       homeView.style.display = 'flex';
     });
